@@ -1,6 +1,7 @@
 // Shared Supabase access for the static whitepapers site.
 // The publishable key is meant for browsers: Row Level Security limits it to
-// reading published whitepapers and calling public.subscribe(). It cannot read leads.
+// reading published whitepapers, calling public.subscribe() (home page) and the techspheres
+// Edge Function (report gate). It cannot read leads or the report PDFs.
 (function () {
   const SUPABASE_URL = 'https://rsqsdzglsdyoluzbouxu.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_Bl9n1qEp1jzVUYs8S1i_kw_yAsyyytT';
@@ -43,5 +44,19 @@
     }
   }
 
-  window.ataresSupabase = { listWhitepapers, subscribe };
+  /**
+   * Report gate tied to the TechSpheres newsletter (Mailchimp double opt-in).
+   * { action: 'subscribe', ... } or { action: 'check', token }. Resolves with the JSON body;
+   * rejects with err.code set to the function's error code.
+   */
+  async function techspheres(payload) {
+    const res = await fetch(SUPABASE_URL + '/functions/v1/techspheres', {
+      method: 'POST', headers, body: JSON.stringify(payload)
+    });
+    const body = await res.json().catch(() => ({}));
+    if (!res.ok) { const e = new Error(body.error || 'techspheres ' + res.status); e.code = body.error; throw e; }
+    return body;
+  }
+
+  window.ataresSupabase = { listWhitepapers, subscribe, techspheres };
 })();

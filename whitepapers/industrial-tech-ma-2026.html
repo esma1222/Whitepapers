@@ -125,6 +125,15 @@ label.f input[aria-invalid="true"] { border-color: #b4572e; }
 .btn { font: inherit; font-weight: 600; font-size: 16px; border: 0; border-radius: 10px; padding: 13px 18px; background: var(--navy); color: #fff; cursor: pointer; }
 .btn:hover { background: var(--petrol); }
 .btn:focus-visible { outline: 2px solid var(--turq); outline-offset: 2px; }
+.seg { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; font-size: 14px; color: var(--navy); }
+.seg span { font-size: 13px; font-weight: 600; }
+.seg label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.seg input { accent-color: var(--petrol); margin: 0; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.linkbtn { font: inherit; font-size: 13px; background: none; border: 0; color: var(--petrol); text-decoration: underline; cursor: pointer; justify-self: start; padding: 0; }
+.btn.dl { text-align: center; text-decoration: none; display: block; }
+.btn[disabled] { opacity: .6; cursor: wait; }
+.done .tick.mail { background: var(--navy); }
 .err { color: #9b4422; font-size: 13px; min-height: 1em; margin: 0; }
 .fine { font-family: var(--f-data); font-size: 11px; color: #324e5e; margin: 0; }
 .done { display: grid; gap: 10px; }
@@ -262,21 +271,45 @@ footer .inner { border-top: 1px solid var(--line); padding-top: 18px; display: f
             <form class="form" id="leadForm" novalidate>
               <div id="formBody" style="display:grid;gap:13px">
                 <h3>Get the full report</h3>
-                <p class="sub">All 62 pages, including where private deals price and what each segment is worth. The report comes with a subscription to TechSpheres, the atares newsletter on tech M&amp;A.</p>
+                <p class="sub">All 62 pages, including where private deals price and what each segment is worth. The report is reserved for subscribers of TechSpheres, the atares newsletter on tech M&amp;A.</p>
+                <fieldset class="seg" aria-label="Salutation (required)">
+                  <label><input type="radio" name="sal" value="Herr">Mr</label>
+                  <label><input type="radio" name="sal" value="Frau">Ms</label>
+                  <label><input type="radio" name="sal" value="Divers">Other</label>
+                </fieldset>
                 <div class="row2">
-                  <label class="f" for="fn">First name<input id="fn" name="fn" autocomplete="given-name"></label>
-                  <label class="f" for="ln">Last name<input id="ln" name="ln" autocomplete="family-name"></label>
+                  <label class="f" for="fn">First name *<input id="fn" name="fn" autocomplete="given-name" required></label>
+                  <label class="f" for="ln">Last name *<input id="ln" name="ln" autocomplete="family-name" required></label>
                 </div>
-                <label class="f" for="co">Company<input id="co" name="co" autocomplete="organization"></label>
-                <label class="f" for="em">Business email<input id="em" name="em" type="email" autocomplete="email" required placeholder="name@company.com"></label>
-                <label class="consent" for="ok"><input id="ok" name="ok" type="checkbox" required><span id="consentText">I subscribe to TechSpheres, the atares newsletter, and receive the report by email. I can unsubscribe at any time. See the <a href="#wall">privacy policy</a>.</span></label>
+                <div class="row2">
+                  <label class="f" for="co">Company<input id="co" name="co" autocomplete="organization"></label>
+                  <label class="f" for="po">Position<input id="po" name="po" autocomplete="organization-title"></label>
+                </div>
+                <label class="f" for="em">Business email *<input id="em" name="em" type="email" autocomplete="email" required placeholder="name@company.com"></label>
+                <fieldset class="seg" aria-label="Newsletter language">
+                  <span>Newsletter in</span>
+                  <label><input type="radio" name="lang" value="en" checked>English</label>
+                  <label><input type="radio" name="lang" value="de">Deutsch</label>
+                </fieldset>
+                <label class="hp" aria-hidden="true">Website<input id="website" name="website" tabindex="-1" autocomplete="off"></label>
+                <label class="consent" for="ok"><input id="ok" name="ok" type="checkbox" required><span id="consentText">I agree that atares GmbH sends me the TechSpheres newsletter by email. I can withdraw this consent at any time, free of charge, with the unsubscribe link in every issue. See the <a href="https://atares.team/datenschutzerklaerung/" target="_blank" rel="noopener">privacy policy</a>.</span></label>
                 <p class="err" id="err" role="alert"></p>
                 <button class="btn" type="submit">Subscribe and get the report</button>
+              </div>
+              <div class="done" id="formPending" hidden>
+                <div class="tick mail"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+                <h3>One step left: confirm your subscription</h3>
+                <p class="sub">We sent a confirmation email to <b id="pendingEmail"></b>. Click the link in it to confirm TechSpheres. The report unlocks on this page as soon as you have confirmed.</p>
+                <p class="err" id="pendingMsg" role="status"></p>
+                <button class="btn" type="button" id="checkBtn">I have confirmed, get the report</button>
+                <button class="linkbtn" type="button" id="restart">Use a different email</button>
               </div>
               <div class="done" id="formDone" hidden>
                 <div class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
                 <h3 id="doneTitle">Thank you</h3>
-                <p class="sub">You are subscribed to TechSpheres. We will send the full report to <b id="doneEmail"></b> shortly.</p>
+                <p class="sub">You are a TechSpheres subscriber. Your copy of the report is ready.</p>
+                <a class="btn dl" id="dlLink" href="#" download>Download the report (PDF)</a>
+                <p class="fine">The download link is valid for 15 minutes. Come back to this page for a new one.</p>
               </div>
             </form>
           </div>
@@ -292,6 +325,7 @@ footer .inner { border-top: 1px solid var(--line); padding-top: 18px; display: f
   <div class="inner"><span>atares GmbH · Munich · www.atares.team</span><span>Deal data to September 16, 2026</span></div>
 </footer>
 
+<script src="../js/supabase.js"></script>
 <script>
 (() => {
   const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -501,32 +535,79 @@ footer .inner { border-top: 1px solid var(--line); padding-top: 18px; display: f
   P.forEach(p => { p.a = p.fa = 0; p.t0 = performance.now(); p.dl = RM ? 0 : p.seed % 900; });
   requestAnimationFrame(frame);
 
-  const form = document.getElementById('leadForm'), err = document.getElementById('err');
+  const SLUG = 'industrial-tech-ma-2026', TOKEN_KEY = 'atares-ts-' + SLUG;
+  const $ = id => document.getElementById(id);
+  const form = $('leadForm'), err = $('err');
+  const store = { get() { try { return JSON.parse(localStorage.getItem(TOKEN_KEY) || 'null'); } catch (_) { return null; } },
+                  set(v) { try { v ? localStorage.setItem(TOKEN_KEY, JSON.stringify(v)) : localStorage.removeItem(TOKEN_KEY); } catch (_) {} } };
+  const ERRORS = {
+    invalid_email: 'Please enter your business email, for example name@company.com.',
+    address_blocked: 'This address cannot receive our newsletter. Please use a different email.',
+    not_configured: 'The subscription is not available right now. Please try again later.',
+    default: 'Something went wrong. Please try again in a moment.'
+  };
+  function show(state) {
+    $('formBody').hidden = state !== 'form'; $('formPending').hidden = state !== 'pending'; $('formDone').hidden = state !== 'done';
+  }
+  function unlocked(url, name) {
+    $('dlLink').href = url; $('doneTitle').textContent = name ? 'Thank you, ' + name : 'Thank you'; show('done');
+  }
+  let poll = null;
+  function pending(saved) {
+    $('pendingEmail').textContent = saved.email; show('pending');
+    clearInterval(poll);
+    let n = 0; // check quietly every 6 s for 10 minutes while the tab is visible
+    poll = setInterval(() => { if (++n > 100) return clearInterval(poll); if (!document.hidden) check(true); }, 6000);
+  }
+  async function check(quiet) {
+    const saved = store.get(); if (!saved) return show('form');
+    const btn = $('checkBtn'); if (!quiet) { btn.disabled = true; $('pendingMsg').textContent = ''; }
+    try {
+      const r = await window.ataresSupabase.techspheres({ action: 'check', token: saved.token });
+      if (r.status === 'subscribed' && r.url) { clearInterval(poll); unlocked(r.url, saved.name); }
+      else if (!quiet) $('pendingMsg').textContent =
+        r.status === 'not_techspheres' ? 'Your address is subscribed, but not to TechSpheres. Please submit the form again to add TechSpheres.'
+        : r.status === 'unsubscribed' || r.status === 'missing' ? 'This subscription is not active. Please submit the form again.'
+        : 'We have not received your confirmation yet. Please click the link in the email, then try again.';
+    } catch (e) {
+      if (e.code === 'invalid_token') { store.set(null); show('form'); }
+      else if (!quiet) $('pendingMsg').textContent = ERRORS[e.code] || ERRORS.default;
+    } finally { btn.disabled = false; }
+  }
+  $('checkBtn').addEventListener('click', () => check(false));
+  $('restart').addEventListener('click', () => { clearInterval(poll); store.set(null); show('form'); $('em').focus(); });
+
   form.addEventListener('submit', async ev => {
     ev.preventDefault();
-    const em = document.getElementById('em'), ok = document.getElementById('ok');
+    const em = $('em'), ok = $('ok'), fn = $('fn'), ln = $('ln');
     const valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em.value.trim());
+    [fn, ln].forEach(f => f.setAttribute('aria-invalid', f.value.trim() ? 'false' : 'true'));
     em.setAttribute('aria-invalid', valid ? 'false' : 'true');
-    if (!valid) { err.textContent = 'Please enter your business email, for example name@company.com.'; em.focus(); return; }
-    if (!ok.checked) { err.textContent = 'The report comes with a TechSpheres subscription. Please tick the box to continue.'; ok.focus(); return; }
+    if (!form.querySelector('input[name=sal]:checked')) { err.textContent = 'Please choose a salutation.'; form.querySelector('input[name=sal]').focus(); return; }
+    if (!fn.value.trim() || !ln.value.trim()) { err.textContent = 'Please enter your first and last name.'; (fn.value.trim() ? ln : fn).focus(); return; }
+    if (!valid) { err.textContent = ERRORS.invalid_email; em.focus(); return; }
+    if (!ok.checked) { err.textContent = 'The report is reserved for TechSpheres subscribers. Please tick the box to subscribe.'; ok.focus(); return; }
     err.textContent = '';
-    const fn = document.getElementById('fn').value.trim();
     const btn = form.querySelector('button[type=submit]'); btn.disabled = true;
+    const val = n => (form.querySelector(`input[name=${n}]:checked`) || {}).value || null;
     try {
-      await window.ataresSupabase.subscribe({
-        email: em.value.trim(), source: 'report-gate', whitepaperSlug: 'industrial-tech-ma-2026',
-        firstName: fn, lastName: document.getElementById('ln').value.trim(), company: document.getElementById('co').value.trim(),
-        consentText: document.getElementById('consentText').textContent.trim()
+      const r = await window.ataresSupabase.techspheres({
+        action: 'subscribe', slug: SLUG, email: em.value.trim(),
+        firstName: fn.value.trim(), lastName: ln.value.trim(), company: $('co').value.trim(), position: $('po').value.trim(),
+        salutation: val('sal'), language: val('lang'), website: $('website').value,
+        consentText: $('consentText').textContent.trim(), userAgent: navigator.userAgent
       });
+      const saved = { token: r.token, email: em.value.trim(), name: fn.value.trim() };
+      store.set(saved);
+      if (r.status === 'subscribed' && r.url) unlocked(r.url, saved.name); else pending(saved);
     } catch (e) {
-      err.textContent = e.invalidEmail ? 'Please enter your business email, for example name@company.com.' : 'Something went wrong. Please try again in a moment.';
-      btn.disabled = false; return;
-    }
-    document.getElementById('doneTitle').textContent = fn ? 'Thank you, ' + fn : 'Thank you';
-    document.getElementById('doneEmail').textContent = em.value.trim();
-    document.getElementById('formBody').hidden = true; document.getElementById('formDone').hidden = false;
+      err.textContent = ERRORS[e.code] || ERRORS.default;
+    } finally { btn.disabled = false; }
   });
+
+  // Returning visitor (e.g. back from the confirmation email): pick up where they left off.
+  const saved = store.get();
+  if (saved && saved.token) { pending(saved); check(true); }
 })();
 </script>
-<script src="../js/supabase.js"></script>
 </body></html>
