@@ -4,7 +4,9 @@ Static site (plain HTML/JS, no build step) for the atares whitepapers, backed by
 
 ```
 index.html                                  Home: hero, featured report, library, "notify me" form
-whitepapers/industrial-tech-ma-2026.html    Report landing page with the gated lead form
+whitepapers/industrial-tech-ma-2026.html    Report landing page: State of Industrial Tech M&A 2026
+whitepapers/cyber-security-report-2027.html Report landing page: atares Cyber Security Report 2027 (PDF not uploaded yet)
+js/report-gate.js                           Shared TechSpheres form logic for every report page (reads data-slug on the form)
 js/supabase.js                              Supabase URL + publishable key, listWhitepapers(), subscribe(), techspheres()
 supabase/functions/techspheres/             Edge Function: TechSpheres (Mailchimp) double opt-in and the report download
 assets/                                     Logos, favicon, background
@@ -40,11 +42,12 @@ Until `MAILCHIMP_API_KEY` is set, the form shows "The subscription is not availa
 - `subscribe(...)`: browser write path for the home page "notify me" form only. Report-gate leads must go through the `techspheres` function.
 
 ### Adding a whitepaper
-1. Copy `whitepapers/industrial-tech-ma-2026.html`, change its content and `SLUG` in its form script.
+1. Copy a report page, change its content and the `data-slug` on `<form id="leadForm">`.
 2. Upload the PDF to the private `reports` bucket (dashboard → Storage).
 3. Insert a row into `whitepapers` with the same `slug`, its `href` and `pdf_path`.
 4. Update the "Latest" block in `index.html` if it is the new featured report.
 
 ## Not yet done
 - Mailchimp secrets (see above).
+- **Cyber Security Report 2027:** the page is live but the PDF is not uploaded. The draft (`261117_Cyber_Paper_Whitepaper_DRAFT.pptx`) still has placeholders on slides 37 and 39. Until then, confirmed subscribers see "the final report is being prepared". To release it, upload the final PDF to the `reports` bucket and set `pdf_path` on its `whitepapers` row. People who signed up meanwhile have `status = 'confirmed'` and an empty `report_released_at`.
 - The home page "notify me" form only stores the address in Supabase. It does not add anyone to Mailchimp yet.

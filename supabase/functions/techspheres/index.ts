@@ -90,9 +90,13 @@ async function downloadUrl(slug: string) {
   return data?.signedUrl ?? null;
 }
 
+// Marks the lead confirmed and returns a download URL, or null while the report's PDF is not uploaded yet
+// (report_released_at then stays empty, so the team can see who is still waiting).
 async function release(row: { id: string; whitepaper_slug: string }) {
-  await db.from("subscribers").update({ status: "confirmed", confirmed_at: new Date().toISOString(), report_released_at: new Date().toISOString() }).eq("id", row.id);
-  return downloadUrl(row.whitepaper_slug);
+  const url = await downloadUrl(row.whitepaper_slug);
+  const now = new Date().toISOString();
+  await db.from("subscribers").update({ status: "confirmed", confirmed_at: now, ...(url ? { report_released_at: now } : {}) }).eq("id", row.id);
+  return url;
 }
 
 // ---------- handlers ----------
