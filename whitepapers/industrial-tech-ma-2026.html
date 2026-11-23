@@ -1,0 +1,532 @@
+<!doctype html><html lang="en"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}.tally.seg div { opacity: .35; transition: opacity .4s; }
+.tally.seg div.on { opacity: 1; }
+@media (max-width: 760px) { .tally.seg { display: none; } }
+</style></head><body>
+<title>State of Industrial Tech M&amp;A 2026 · atares</title>
+<link rel="icon" href="../assets/favicon.svg">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: fixed dot canvas; hero with the locked price; three scroll stories on a turquoise thread; blurred topics under the content wall. */
+:root {
+  --ink: #002336;          /* atares dark blue */
+  --navy: #003E5F;         /* atares navy */
+  --petrol: #007775;       /* atares petrol */
+  --turq: #00C3BF;         /* atares turquoise, the one accent */
+  --mist: #cbd2d6;
+  --stone: #98a6ae;
+  --mid: #324e5e;
+  --paper: #f2f3f4;
+  --card: rgba(0, 35, 54, .78);
+  --line: rgba(203, 210, 214, .18);
+  --f-display: "Sora", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --f-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark;
+}
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--ink); color: var(--paper); font-family: var(--f-body); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+#dots { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; transition: filter .8s ease, opacity .8s ease; }
+body.at-wall #dots { filter: blur(7px); opacity: .45; }
+.glow { position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: url(../assets/bg-dark.jpg) center / cover no-repeat; }
+.wrap { position: relative; z-index: 1; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.inner { max-width: 1180px; margin: 0 auto; }
+a { color: var(--turq); }
+
+/* top bar */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 6; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 16px;
+  background: linear-gradient(var(--ink) 55%, rgba(0,35,54,0)); margin-inline: -16px; padding-inline: 16px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--ink); }
+.brand { font-family: var(--f-display); font-weight: 700; font-size: 18px; color: var(--paper); text-decoration: none; }
+.brand span { color: var(--turq); }
+.bar .right { display: flex; align-items: center; gap: 12px; }
+.proto { font-family: var(--f-data); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--stone); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; background: rgba(0,35,54,.5); }
+.ghostbtn { font-size: 14px; font-weight: 600; color: var(--ink); background: var(--turq); border-radius: 999px; padding: 8px 14px; text-decoration: none; }
+.ghostbtn:focus-visible, .cta:focus-visible { outline: 2px solid var(--paper); outline-offset: 2px; }
+
+.eyebrow { font-family: var(--f-data); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--turq); }
+
+/* hero */
+.hero { min-height: 88vh; display: flex; align-items: center; padding-block: 16px 56px; }
+.hero .copy { max-width: 560px; display: grid; gap: 20px; }
+h1 { font-family: var(--f-display); font-weight: 600; font-size: clamp(30px, 4.3vw, 52px); line-height: 1.1; margin: 0; text-wrap: balance; letter-spacing: -.015em; }
+.lede { font-size: clamp(16px, 1.5vw, 18px); color: var(--mist); max-width: 46ch; margin: 0; }
+.prize { display: grid; gap: 6px; border: 1px solid rgba(0,195,191,.45); background: linear-gradient(135deg, rgba(0,119,117,.28), rgba(0,35,54,.75)); border-radius: 14px; padding: 18px 20px; max-width: 460px; text-decoration: none; color: var(--paper); }
+.prize .q { font-size: 15px; color: var(--mist); }
+.prize .v { font-family: var(--f-display); font-weight: 700; font-size: clamp(34px, 4vw, 46px); line-height: 1.05; display: flex; align-items: baseline; gap: 10px; }
+.blur { filter: blur(9px); user-select: none; color: var(--turq); }
+.prize .v small { font-size: .42em; color: var(--paper); font-weight: 600; }
+.prize .lock { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--turq); }
+.prize .lock svg, .lockico { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
+.prize:hover { border-color: var(--turq); }
+.prize:focus-visible { outline: 2px solid var(--turq); outline-offset: 3px; }
+.cue { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; color: var(--stone); }
+.cue i { width: 20px; height: 32px; border: 1.5px solid var(--stone); border-radius: 12px; position: relative; }
+.cue i::after { content: ""; position: absolute; left: 50%; top: 7px; width: 3px; height: 7px; margin-left: -1.5px; border-radius: 2px; background: var(--turq); animation: wheel 1.8s ease-in-out infinite; }
+@keyframes wheel { 0%{transform:translateY(0);opacity:1} 70%{transform:translateY(10px);opacity:0} 100%{opacity:0} }
+@media (prefers-reduced-motion: reduce) { .cue i::after { animation: none; } }
+
+/* story with the turquoise thread */
+.story { position: relative; padding-left: 40px; }
+.thread { position: absolute; left: 9px; top: 0; bottom: 0; width: 2px; background: rgba(203,210,214,.16); border-radius: 2px; }
+.thread-fill { position: absolute; left: 0; top: 0; width: 2px; height: 0; background: var(--turq); border-radius: 2px; box-shadow: 0 0 12px rgba(0,195,191,.7); }
+.thread-fill::after { content: ""; position: absolute; left: 50%; bottom: -6px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--turq); box-shadow: 0 0 0 5px rgba(0,195,191,.2), 0 0 18px rgba(0,195,191,.9); }
+.step { min-height: 100vh; display: flex; align-items: center; padding-block: 10vh; }
+.step.tall { display: block; min-height: 290vh; padding-block: 0; }
+.tally { display: grid; gap: 6px; font-size: 14px; color: var(--mist); }
+.tally div { display: grid; grid-template-columns: 1fr auto; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 5px; }
+.tally b { font-family: var(--f-data); font-weight: 500; color: var(--turq); font-variant-numeric: tabular-nums; }
+.hint { font-family: var(--f-data); font-size: 11px; color: var(--stone); display: flex; align-items: center; gap: 8px; }
+.hint .bar2 { flex: 1; height: 3px; background: rgba(203,210,214,.16); border-radius: 2px; overflow: hidden; }
+.hint .bar2 i { display: block; height: 100%; width: 0; background: var(--turq); }
+.step.tall .card { position: sticky; top: var(--ct, 26vh); }
+.card { position: relative; max-width: 400px; display: grid; gap: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px 24px 20px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.card .node { position: absolute; left: -38px; top: 28px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--stone); background: var(--ink); transition: all .3s; }
+.card .node.on { border-color: var(--turq); background: var(--turq); box-shadow: 0 0 14px rgba(0,195,191,.8); }
+.count { font-family: var(--f-data); font-size: 11px; color: var(--stone); letter-spacing: .08em; }
+.big { font-family: var(--f-display); font-weight: 700; font-size: clamp(42px, 5vw, 62px); line-height: 1; color: var(--turq); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.big small { font-size: .42em; color: var(--mist); font-weight: 600; letter-spacing: 0; }
+.card p { margin: 0; font-size: 17px; }
+.card p.more { font-size: 15px; color: var(--mist); }
+.src { font-family: var(--f-data); font-size: 11px; color: var(--stone); border-top: 1px solid var(--line); padding-top: 10px; margin-top: 2px; }
+.key { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--mist); }
+.key span { display: inline-flex; align-items: center; gap: 7px; }
+.key b { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+/* wall: blurred topics with the form on top */
+.wallhead { display: grid; gap: 12px; padding-block: 12vh 28px; max-width: 640px; position: relative; }
+.wallhead .node { position: absolute; left: -40px; top: calc(12vh + 2px); width: 22px; height: 22px; border-radius: 50%; background: var(--ink); border: 2px solid var(--stone); display: grid; place-items: center; color: var(--stone); transition: all .3s; margin-left: -4px; }
+.wallhead .node.on { border-color: var(--turq); color: var(--ink); background: var(--turq); box-shadow: 0 0 16px rgba(0,195,191,.8); }
+.wallhead .node svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2.4; }
+h2 { font-family: var(--f-display); font-weight: 600; font-size: clamp(28px, 3.4vw, 42px); line-height: 1.12; margin: 0; text-wrap: balance; }
+.zone { display: grid; padding-bottom: 10vh; }
+.zone > * { grid-area: 1 / 1; }
+.topics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.topic { background: rgba(0,35,54,.7); border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: grid; gap: 12px; align-content: start; min-height: 230px; }
+.topic h3 { margin: 0; font-family: var(--f-display); font-size: 16px; font-weight: 600; line-height: 1.3; color: var(--paper); }
+.topic .tag { font-family: var(--f-data); font-size: 11px; color: var(--turq); letter-spacing: .1em; text-transform: uppercase; }
+.topic svg.viz { width: 100%; height: auto; filter: blur(5px); opacity: .9; }
+.gate { align-self: start; justify-self: center; position: sticky; top: 11vh; margin-top: 7vh; z-index: 3; width: min(440px, 100%); }
+.form { background: var(--paper); color: var(--navy); border-radius: 16px; padding: 26px; display: grid; gap: 13px; box-shadow: 0 30px 90px rgba(0,0,0,.55), 0 0 0 1px rgba(0,195,191,.5); }
+.form h3 { margin: 0; font-family: var(--f-display); font-size: 22px; font-weight: 600; color: var(--navy); }
+.form p.sub { margin: 0; color: #324e5e; font-size: 15px; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+label.f { display: grid; gap: 6px; font-size: 13px; font-weight: 600; color: var(--navy); }
+label.f input { font: inherit; font-weight: 400; font-size: 15px; padding: 10px 12px; border-radius: 9px; border: 1px solid #cbd2d6; background: #fff; color: var(--navy); width: 100%; box-sizing: border-box; }
+label.f input:focus-visible { outline: 2px solid var(--petrol); outline-offset: 1px; border-color: var(--petrol); }
+label.f input[aria-invalid="true"] { border-color: #b4572e; }
+.consent { display: grid; grid-template-columns: 20px 1fr; gap: 10px; font-size: 13px; color: #324e5e; line-height: 1.45; }
+.consent input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--petrol); }
+.consent a { color: var(--petrol); }
+.btn { font: inherit; font-weight: 600; font-size: 16px; border: 0; border-radius: 10px; padding: 13px 18px; background: var(--navy); color: #fff; cursor: pointer; }
+.btn:hover { background: var(--petrol); }
+.btn:focus-visible { outline: 2px solid var(--turq); outline-offset: 2px; }
+.err { color: #9b4422; font-size: 13px; min-height: 1em; margin: 0; }
+.fine { font-family: var(--f-data); font-size: 11px; color: #324e5e; margin: 0; }
+.done { display: grid; gap: 10px; }
+.done .tick { width: 44px; height: 44px; border-radius: 50%; background: var(--turq); display: grid; place-items: center; }
+.done .tick svg { width: 22px; height: 22px; stroke: #fff; stroke-width: 2.6; fill: none; }
+
+/* sticky call to action */
+.cta { position: fixed; z-index: 7; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 140%);
+  display: inline-flex; align-items: center; gap: 10px; background: var(--turq); color: var(--ink); font-weight: 600; font-size: 15px;
+  padding: 12px 20px; border-radius: 999px; text-decoration: none; box-shadow: 0 10px 30px rgba(0,0,0,.4); transition: transform .4s ease; white-space: nowrap; }
+@media (max-width: 400px) { .cta { font-size: 14px; padding: 10px 16px; } }
+.cta.show { transform: translate(-50%, 0); }
+.cta svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.2; }
+
+footer { position: relative; z-index: 1; padding-block: 24px 90px; color: var(--stone); font-size: 12px; font-family: var(--f-data); }
+footer .inner { border-top: 1px solid var(--line); padding-top: 18px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+
+@media (max-width: 900px) { .topics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* below 980px the cards sit under the chart instead of beside it */
+@media (max-width: 979px) {
+  .hero { align-items: flex-end; min-height: 94vh; padding-block: 0 40px; }
+  .step { align-items: flex-end; padding-block: 0 13vh; min-height: 105vh; }
+  .card { max-width: 620px; }
+}
+@media (max-width: 979px) and (max-height: 760px) { .card p.more, .card .key, .card .tally, .card .hint { display: none; } }
+@media (min-width: 980px) and (max-height: 680px) { .card p.more { display: none; } }
+@media (max-width: 760px) {
+  .bar .ghostbtn { display: none; }
+  .story { padding-left: 30px; }
+  .thread { left: 6px; }
+  .card .node { left: -31px; top: 24px; width: 12px; height: 12px; }
+  .wallhead .node { left: -30px; width: 20px; height: 20px; }
+  .card { max-width: none; padding: 18px 16px 14px; gap: 9px; }
+  .card p { font-size: 15.5px; }
+  .card p.more { font-size: 14px; }
+  .big { font-size: 40px; }
+  .topics { grid-template-columns: 1fr; }
+  .topic { min-height: 0; }
+  .form { padding: 20px 16px; gap: 10px; }
+  .gate { top: 8vh; }
+}
+.tally.seg div { opacity: .35; transition: opacity .4s; }
+.tally.seg div.on { opacity: 1; }
+@media (max-width: 760px) { .tally.seg { display: none; } }
+</style>
+
+<div class="glow" aria-hidden="true"></div>
+<canvas id="dots" aria-hidden="true"></canvas>
+
+<div class="wrap">
+  <div class="inner">
+    <header class="bar">
+      <a class="brand" href="../index.html" id="top" aria-label="atares"><img src="../assets/atares-logo-white.png" alt="atares" style="height:34px;width:auto;display:block"></a>
+      <div class="right"><a class="proto" href="../index.html" style="text-decoration:none">All whitepapers</a><a class="ghostbtn" href="#wall">Get the report</a></div>
+    </header>
+
+    <section class="hero" data-scene="0">
+      <div class="copy">
+        <div class="eyebrow">State of Industrial Tech M&amp;A 2026</div>
+        <h1>Industrial tech M&amp;A is stable in volume. The end market decides the value.</h1>
+        <p class="lede">Three findings from 1,981 deals and 84 listed companies, and the one number every owner wants to know.</p>
+        <a class="prize" href="#wall" aria-label="Where private industrial deals price today: revealed in the full report">
+          <span class="q">Where private industrial deals price today</span>
+          <span class="v"><span class="blur" aria-hidden="true">8x-88x</span><small>EBITDA</small></span>
+          <span class="lock"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Revealed in the full report</span>
+        </a>
+        <div class="cue"><i aria-hidden="true"></i>Scroll for three findings</div>
+      </div>
+    </section>
+
+    <div class="story" id="story">
+      <div class="thread" aria-hidden="true"><div class="thread-fill" id="fill"></div></div>
+
+      <section class="step tall" data-scene="1">
+        <div class="card">
+          <span class="node" aria-hidden="true"></span>
+          <div class="count">Finding 1 of 3 · Deal activity</div>
+          <div class="big" id="dBig">419</div>
+          <p id="dText">in-scope deals in 2022.</p>
+          <p class="more">Every full year from 2022 to 2025 landed between 410 and 445 deals. Inside that stable market, add-ons rose from 6.3% to 18.7% of deals.</p>
+          <div class="key"><span><b style="background:#00C3BF"></b>Financial buyer</span><span><b style="background:#cbd2d6"></b>Strategic buyer</span><span><b style="background:rgba(203,210,214,.35)"></b>2026 forecast</span></div>
+          <div class="hint"><span>2022</span><span class="bar2"><i data-prog="1"></i></span><span>2026</span></div>
+          <div class="src">Sources: Mergermarket; atares analysis. 1,981 in-scope deals, 2022 to Sep 16, 2026. One dot = 5 deals</div>
+        </div>
+      </section>
+
+      <section class="step tall" data-scene="2">
+        <div class="card">
+          <span class="node" aria-hidden="true"></span>
+          <div class="count">Finding 2 of 3 · Volume and value</div>
+          <div class="big">15.6x</div>
+          <p>for Optimise, with only 8.5% of deals. The busiest segments are not the highest valued.</p>
+          <div class="tally seg" id="segTally"><div><span>Manufacture</span><b>24.2% · 14.2x</b></div><div><span>Act</span><b>20.5% · 7.2x</b></div><div><span>Sense</span><b>20.3% · 13.7x</b></div><div><span>Power</span><b>16.5% · 13.7x</b></div><div><span>Optimise</span><b>8.5% · 15.6x</b></div><div><span>Control</span><b>6.1% · 11.8x</b></div><div><span>Connect</span><b>3.9% · 12.7x</b></div></div>
+          <div class="hint"><span>Busiest</span><span class="bar2"><i data-prog="2"></i></span><span>Rarest</span></div>
+          <div class="src">Sources: Mergermarket; Inven. Share of in-scope deals and listed median EV/EBITDA by segment</div>
+        </div>
+      </section>
+
+      <section class="step tall" data-scene="3">
+        <div class="card">
+          <span class="node" aria-hidden="true"></span>
+          <div class="count">Finding 3 of 3 · End markets</div>
+          <div class="big" id="eBig">6.5x</div>
+          <p id="eText">median EV/EBITDA for cyclical, automotive-exposed companies (8 of 84).</p>
+          <p class="more">A weighted quality score adds only +0.08 once growth and margin are held constant. End-market exposure stays at +0.30.</p>
+          <div class="key"><span><b style="background:#00C3BF"></b>Secular end markets</span><span><b style="background:#cbd2d6"></b>Other listed companies</span></div>
+          <div class="hint"><span>Cyclical</span><span class="bar2"><i data-prog="3"></i></span><span>Secular</span></div>
+          <div class="src">Sources: Inven; atares quality scorecard. 84 listed companies</div>
+        </div>
+      </section>
+
+      <section id="wall" data-scene="4">
+        <div class="wallhead">
+          <span class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+          <div class="eyebrow">The full report · 62 pages</div>
+          <h2>The prices, the seven segments and what buyers reward in 2027 are in the report</h2>
+        </div>
+        <div class="zone">
+          <div class="topics" aria-hidden="true">
+            <div class="topic"><span class="tag">Valuation</span><h3>Where private industrial deals price today</h3>
+              <svg class="viz" viewBox="0 0 300 120"><g fill="#00C3BF"><rect x="0" y="8" width="250" height="16" rx="3"/><rect x="0" y="34" width="232" height="16" rx="3"/><rect x="0" y="60" width="205" height="16" rx="3"/><rect x="0" y="86" width="170" height="16" rx="3"/></g><rect x="200" y="0" width="44" height="110" fill="#cbd2d6" opacity=".25"/></svg></div>
+            <div class="topic"><span class="tag">Subsectors</span><h3>Deep dives on all seven segments, with competitive maps</h3>
+              <svg class="viz" viewBox="0 0 300 120"><g fill="#cbd2d6"><rect x="0" y="4" width="120" height="10" rx="3"/><rect x="0" y="26" width="150" height="10" rx="3"/><rect x="0" y="48" width="100" height="10" rx="3"/><rect x="0" y="70" width="140" height="10" rx="3"/><rect x="0" y="92" width="110" height="10" rx="3"/></g><g fill="#00C3BF"><circle cx="200" cy="9" r="6"/><circle cx="216" cy="9" r="6"/><circle cx="200" cy="31" r="6"/><circle cx="200" cy="53" r="6"/><circle cx="216" cy="53" r="6"/><circle cx="232" cy="53" r="6"/><circle cx="200" cy="75" r="6"/><circle cx="200" cy="97" r="6"/><circle cx="216" cy="97" r="6"/></g></svg></div>
+            <div class="topic"><span class="tag">Why now</span><h3>Labour, sovereignty and capex: the three forces behind demand</h3>
+              <svg class="viz" viewBox="0 0 300 120"><g fill="#00C3BF"><rect x="20" y="70" width="40" height="40" rx="3"/><rect x="80" y="40" width="40" height="70" rx="3"/><rect x="140" y="20" width="40" height="90" rx="3"/></g><g fill="#cbd2d6"><rect x="200" y="56" width="40" height="54" rx="3"/><rect x="250" y="80" width="40" height="30" rx="3"/></g></svg></div>
+            <div class="topic"><span class="tag">Exits</span><h3>A 3.8 tnUSD exit backlog and the pressure on sponsors to sell</h3>
+              <svg class="viz" viewBox="0 0 300 120"><path d="M10 60h280" stroke="#cbd2d6" stroke-width="2"/><g fill="#00C3BF"><circle cx="40" cy="60" r="7"/><circle cx="85" cy="60" r="7"/><circle cx="110" cy="60" r="7"/><circle cx="160" cy="60" r="7"/><circle cx="190" cy="60" r="7"/><circle cx="230" cy="60" r="7"/><circle cx="262" cy="60" r="7"/></g><g fill="#f2f3f4"><rect x="20" y="20" width="50" height="10" rx="3"/><rect x="140" y="20" width="60" height="10" rx="3"/><rect x="90" y="88" width="56" height="10" rx="3"/><rect x="210" y="88" width="60" height="10" rx="3"/></g></svg></div>
+            <div class="topic"><span class="tag">Regulation</span><h3>Five EU rules that set the diligence calendar to 2028</h3>
+              <svg class="viz" viewBox="0 0 300 120"><path d="M10 60h280" stroke="#cbd2d6" stroke-width="2"/><g fill="#00C3BF"><rect x="20" y="40" width="40" height="40" rx="6"/><rect x="80" y="40" width="40" height="40" rx="6"/><rect x="140" y="40" width="40" height="40" rx="6"/></g><g fill="#f2f3f4"><rect x="200" y="40" width="40" height="40" rx="6"/><rect x="250" y="40" width="40" height="40" rx="6"/></g></svg></div>
+            <div class="topic"><span class="tag">Outlook</span><h3>What buyers will reward in 2027, and what sellers should prepare</h3>
+              <svg class="viz" viewBox="0 0 300 120"><rect x="0" y="20" width="110" height="26" rx="3" fill="#00C3BF"/><rect x="110" y="20" width="40" height="26" rx="3" fill="#cbd2d6"/><rect x="0" y="70" width="64" height="26" rx="3" fill="#00C3BF"/><rect x="64" y="70" width="86" height="26" rx="3" fill="#324e5e"/><path d="M170 33h40M170 83h40" stroke="#cbd2d6" stroke-width="3"/><rect x="225" y="18" width="70" height="30" rx="6" fill="#f2f3f4"/><rect x="225" y="68" width="56" height="30" rx="6" fill="#f2f3f4"/></svg></div>
+          </div>
+
+          <div class="gate">
+            <form class="form" id="leadForm" novalidate>
+              <div id="formBody" style="display:grid;gap:13px">
+                <h3>Get the full report</h3>
+                <p class="sub">All 62 pages, including where private deals price and what each segment is worth. The report comes with a subscription to TechSpheres, the atares newsletter on tech M&amp;A.</p>
+                <div class="row2">
+                  <label class="f" for="fn">First name<input id="fn" name="fn" autocomplete="given-name"></label>
+                  <label class="f" for="ln">Last name<input id="ln" name="ln" autocomplete="family-name"></label>
+                </div>
+                <label class="f" for="co">Company<input id="co" name="co" autocomplete="organization"></label>
+                <label class="f" for="em">Business email<input id="em" name="em" type="email" autocomplete="email" required placeholder="name@company.com"></label>
+                <label class="consent" for="ok"><input id="ok" name="ok" type="checkbox" required><span id="consentText">I subscribe to TechSpheres, the atares newsletter, and receive the report by email. I can unsubscribe at any time. See the <a href="#wall">privacy policy</a>.</span></label>
+                <p class="err" id="err" role="alert"></p>
+                <button class="btn" type="submit">Subscribe and get the report</button>
+              </div>
+              <div class="done" id="formDone" hidden>
+                <div class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+                <h3 id="doneTitle">Thank you</h3>
+                <p class="sub">You are subscribed to TechSpheres. We will send the full report to <b id="doneEmail"></b> shortly.</p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<a class="cta" id="cta" href="#wall"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Get the full report</a>
+
+<footer class="wrap">
+  <div class="inner"><span>atares GmbH · Munich · www.atares.team</span><span>Deal data to September 16, 2026</span></div>
+</footer>
+
+<script>
+(() => {
+  const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cv = document.getElementById('dots'), ctx = cv.getContext('2d');
+  let W = 0, H = 0, DPR = 1;
+  const C = { turq: [0,195,191], paper: [242,243,244], mist: [203,210,214], stone: [152,166,174], ghost: [140,165,178] };
+
+  const N = 640;
+  const rnd = (() => { let s = 20261123; return () => (s = (s * 16807) % 2147483647) / 2147483647; })();
+  const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const all = shuffle([...Array(N).keys()]);
+  const P = all.map(() => ({ x: 0, y: 0, r: 1.5, a: 0, c: C.mist.slice(), fx: 0, fy: 0, fr: 0, fa: 0, fc: C.mist.slice(), tx: 0, ty: 0, tr: 1.5, ta: 0, tc: C.mist, t0: 0, dl: 0, seed: rnd() * 1000 }));
+  // in-scope deals per year (one dot = 5 deals) and financial-buyer share
+  const years = ['2022', '2023', '2024', '2025', '2026'];
+  const yDeals = [419, 410, 440, 445, 267], yDots = [84, 82, 88, 89, 53], yFin = [25, 30, 25, 32, 15];
+  const deals = all.slice(0, 396), fc = all.slice(396, 418), comps = all.slice(418, 502);
+  { let k = 0; yDots.forEach((n, yi) => { for (let j = 0; j < n; j++) { const p = P[deals[k++]]; p.yi = yi; p.fin = j < yFin[yi]; } }); }
+  // segments: name, deal share %, listed median x, label side
+  const segs = [['Manufacture', 24.2, 14.2, 'below'], ['Act', 20.5, 7.2, 'below'], ['Sense', 20.3, 13.7, 'above'], ['Power', 16.5, 13.7, 'above'], ['Optimise', 8.5, 15.6, 'above'], ['Control', 6.1, 11.8, 'below'], ['Connect', 3.9, 12.7, 'above']];
+  const segN = segs.map(s => Math.round(396 * s[1] / 100));
+  { const o = shuffle(deals.slice()); let k = 0; segN.forEach((n, si) => { for (let j = 0; j < n; j++) P[o[k++]].seg = si; }); }
+  // end-market groups: long name, short name, companies, median x
+  const grp = [['Cyclical / automotive', 'Cyclical', 8, 6.5], ['General industrial', 'General', 44, 10.7], ['Semis, life science, pharma', 'Semis, pharma', 32, 18.9]];
+  { let k = 0; grp.forEach((g, gi) => { for (let j = 0; j < g[2]; j++) P[comps[k++]].grp = gi; }); }
+  const used = { 1: new Set(deals.concat(fc)), 2: new Set(deals.filter(i => P[i].seg != null)), 3: new Set(comps) };
+
+  const phone = () => W < 760;
+  const stacked = () => W < 980;
+  const bar = document.querySelector('.bar');
+  const headBottom = () => Math.max(56, bar.getBoundingClientRect().bottom);
+  function cardTop(card) { const hb = headBottom(), h = card.offsetHeight;
+    return stacked() ? Math.max(hb + 150, H - h - 84) : clamp((H - h) / 2 + 10, hb + 16, Math.max(hb + 16, H - h - 16)); }
+  function setCardTops() { document.querySelectorAll('.step.tall .card').forEach(c => c.style.setProperty('--ct', cardTop(c) + 'px')); }
+  function box() {
+    const hb = headBottom(); const sec = secs[scene];
+    const card = sec && (sec.querySelector('.card') || sec.querySelector('.copy'));
+    if (!stacked()) { const right = card ? card.getBoundingClientRect().right : W * .42;
+      const x = right + Math.max(40, W * .04), y = hb + 28;
+      return { x, y, w: Math.max(240, W - x - Math.max(28, W * .03)), h: Math.max(220, H - y - 96) }; }
+    const top = card ? (scene === 0 ? card.getBoundingClientRect().top + scrollY : cardTop(card)) : H * .5;
+    const m = Math.max(16, W * .05), y = hb + 18;
+    return { x: m, y, w: W - 2 * m, h: Math.max(scene === 0 ? 50 : 130, top - y - 34) };
+  }
+  const GA = Math.PI * (3 - Math.sqrt(5));
+  const sun = (n, cx, cy, s) => Array.from({ length: n }, (_, k) => { const rr = s * Math.sqrt(k + .5); return [cx + rr * Math.cos(k * GA), cy + rr * Math.sin(k * GA)]; });
+  const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
+  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  let GP = [];
+  function ghostSlots() { const pts = sun(N, W * (phone() ? .5 : .66), H * (phone() ? .3 : .5), Math.max(W, H) * .04); GP = []; all.forEach((i, k) => GP[i] = pts[k]); }
+  function set(i, x, y, r, a, c) { const p = P[i]; p.tx = x; p.ty = y; p.tr = r; p.ta = a; p.tc = c; }
+  function ghost(list) { list.forEach(i => set(i, GP[i][0], GP[i][1], 1.1, .07, C.ghost)); }
+  function scrub(i, S, E, q0, q1) { const p = P[i]; p.S = S; p.E = E; p.q0 = q0; p.q1 = q1; p.tc = S[4]; }
+  const from = i => [GP[i][0], GP[i][1], 1.1, .07, C.ghost];
+  let labels = [], guides = [], axes = null;
+  const lab = (x, y, t, sub, al = 'center', col = 'paper', fq = 0) => labels.push({ x, y, t, sub, al, col, from: fq });
+
+  const scenes = [
+    () => { const b = box(); const s = Math.min(b.w, b.h) * .5 / Math.sqrt(N); const pts = sun(N, b.x + b.w * .5, b.y + b.h * .5, s * 1.05);
+      all.forEach((i, k) => set(i, pts[k][0], pts[k][1], Math.max(1.3, Math.min(4.2, s * .4)), .85, k % 9 === 0 ? C.turq : C.mist)); },
+    // 1 deals per year: columns fill year by year, 2026 gets a faint forecast cap
+    () => { const b = box(); const colW = b.w / 5, cols = 6;
+      const s = Math.min((b.h * .74) / Math.ceil(90 / cols), colW / (cols + 1.6)); const base = b.y + b.h * .9; const r = Math.min(s * .36, 5.5);
+      const at = yi => yi * .18;
+      years.forEach((y, yi) => { const ids = deals.filter(i => P[i].yi === yi).sort((a, c) => P[c].fin - P[a].fin);
+        const cx = b.x + colW * (yi + .5);
+        const pos = k => [cx + ((k % cols) - (cols - 1) / 2) * s, base - Math.floor(k / cols) * s];
+        ids.forEach((i, k) => { const q0 = at(yi) + (k / ids.length) * .08; const [x, yy] = pos(k);
+          scrub(i, from(i), [x, yy, r, 1, P[i].fin ? C.turq : C.mist], q0, q0 + .06); });
+        let n = ids.length;
+        if (yi === 4) { fc.forEach((i, j) => { const q0 = .86 + (j / fc.length) * .06; const [x, yy] = pos(n + j);
+          scrub(i, from(i), [x, yy, r, .32, C.mist], q0, q0 + .04); }); n += fc.length; }
+        lab(cx, base + s * .8 + 14, yi === 4 ? (phone() ? '26 YTD' : '2026 YTD') : y, null, 'center', 'mist', 0);
+        lab(cx, base - Math.ceil(n / cols) * s - 4, yi === 4 ? '267 (~376 FC)' : String(yDeals[yi]), null, 'center', 'stone', at(yi) + .08); });
+      if (b.h >= 300) lab(b.x, b.y + 6, phone() ? 'Deals per year, in #' : 'In-scope deals per year, in #', null, 'left', 'mist');
+      ghost(all.filter(i => !used[1].has(i))); },
+    // 2 deal share against listed median, one cluster per segment
+    () => { const b = box(); const ph = phone();
+      const ax = { x0: b.x + (ph ? 30 : 40), x1: b.x + b.w - 10, y0: b.y + b.h - 40, y1: b.y + (b.h >= 300 ? 34 : 12) };
+      const X = v => ax.x0 + (ax.x1 - ax.x0) * v / 28, Y = m => ax.y0 - (ax.y0 - ax.y1) * (m - 4) / 16;
+      axes = { ax, X, Y, titles: b.h >= 300 };
+      const s = clamp(Math.min(ax.x1 - ax.x0, ax.y0 - ax.y1) * .0085, 2, 5), r = Math.max(1, s * .4);
+      segs.forEach((g, si) => { const ids = deals.filter(i => P[i].seg === si); const cx = X(g[1]), cy = Y(g[2]); const pts = sun(ids.length, cx, cy, s); const w0 = si * .12;
+        ids.forEach((i, k) => { const q0 = w0 + (k / ids.length) * .05;
+          scrub(i, from(i), [pts[k][0], pts[k][1], r, 1, si === 4 ? C.turq : C.mist], q0, q0 + .06); });
+        const R = s * Math.sqrt(ids.length) + 3;
+        if (g[3] === 'above') lab(cx, cy - R - 24, g[0], g[2].toFixed(1) + 'x', 'center', 'paper', w0 + .08);
+        else lab(cx, cy + R + 16, g[0], g[2].toFixed(1) + 'x', 'center', 'paper', w0 + .08); });
+      guides.push({ type: 'axes', from_q: 0 });
+      ghost(all.filter(i => !used[2].has(i))); },
+    // 3 listed companies by end market, columns placed on the multiple scale
+    () => { const b = box(); const short = b.w < 640;
+      const X = m => b.x + b.w * .06 + (b.w * .88) * (m - 4) / 17; const cols = 4;
+      const s = Math.min(b.h * .58 / 11, (X(10.7) - X(6.5)) / (cols + 2)); const base = b.y + b.h * .82; const r = Math.min(s * .38, 5.5);
+      grp.forEach((g, gi) => { const ids = comps.filter(i => P[i].grp === gi); const cx = X(g[3]); const w0 = gi * .27;
+        ids.forEach((i, k) => { const q0 = w0 + (k / ids.length) * .12;
+          scrub(i, from(i), [cx + ((k % cols) - (cols - 1) / 2) * s, base - Math.floor(k / cols) * s, r, 1, gi === 2 ? C.turq : C.mist], q0, q0 + .07); });
+        lab(cx, base - Math.ceil(ids.length / cols) * s - 10, g[3].toFixed(1) + 'x', null, 'center', gi === 2 ? 'turq' : 'paper', w0 + .1);
+        lab(cx, base + s * .8 + 16, short ? g[1] : g[0], g[2] + ' companies', 'center', 'mist', 0); });
+      guides.push({ type: 'brace', x0: X(6.5), x1: X(18.9), y: base - 11 * s - 44, t: '×2.9 valuation spread', from_q: .86 });
+      if (b.h >= 300) lab(b.x, b.y + 6, short ? 'Median EV/EBITDA by end market' : 'Median EV/EBITDA of 84 listed companies, by end market', null, 'left', 'mist');
+      ghost(all.filter(i => !used[3].has(i))); },
+    () => { const pts = sun(N, W * .5, H * .5, Math.max(W, H) * .034); all.forEach((i, k) => set(i, pts[k][0], pts[k][1], 1.6, .35, k % 7 === 0 ? C.turq : C.mist)); }
+  ];
+
+  let scene = -1, sceneT = 0; const DUR = RM ? 1 : 1150;
+  const secs = {}; document.querySelectorAll('[data-scene]').forEach(el => secs[el.dataset.scene] = el);
+  function go(n, instant) {
+    if (n === scene && !instant) return;
+    scene = n; labels = []; guides = []; axes = null;
+    P.forEach(p => { p.S = null; });
+    scenes[n]();
+    const now = performance.now(); sceneT = now;
+    P.forEach((p, i) => { p.fx = p.x; p.fy = p.y; p.fr = p.r; p.fa = p.a; p.fc = p.c.slice(); p.t0 = now;
+      p.dl = instant || RM ? 0 : (i % 97) * 3.2 + p.seed % 120;
+      if (instant) { p.fx = p.x = p.tx; p.fy = p.y = p.ty; p.fr = p.r = p.tr; p.fa = p.a = p.ta; } });
+    document.body.classList.toggle('at-wall', n === 4);
+  }
+
+  const prog = {};
+  const progEls = [...document.querySelectorAll('[data-prog]')];
+  function progress(el) { if (!el || !el.classList.contains('tall')) return 1; if (RM) return 1; const r = el.getBoundingClientRect(); return clamp((H * .55 - r.top) / (r.height * .7), 0, 1); }
+  const dBig = document.getElementById('dBig'), dText = document.getElementById('dText');
+  const eBig = document.getElementById('eBig'), eText = document.getElementById('eText');
+  const segRows = [...document.querySelectorAll('#segTally > div')];
+  const eTexts = ['median EV/EBITDA for cyclical, automotive-exposed companies (8 of 84).',
+    'for general industrial companies, the middle of the market (44 of 84).',
+    'for semis, life science and pharma: almost three times the cyclical multiple (32 of 84).'];
+  function updateCards() {
+    [1, 2, 3].forEach(n => prog[n] = progress(secs[n]));
+    progEls.forEach(el => el.style.width = (prog[el.dataset.prog] * 100).toFixed(1) + '%');
+    const yi = clamp(Math.floor(prog[1] / .18 + .0001), 0, 4);
+    if (dBig.dataset.v !== String(yi)) { dBig.dataset.v = String(yi); dBig.textContent = yDeals[yi];
+      dText.textContent = yi === 4 ? 'in-scope deals in 2026 up to September 16, about 376 annualised.' : 'in-scope deals in ' + years[yi] + '.'; }
+    segRows.forEach((row, si) => row.classList.toggle('on', prog[2] >= si * .12 + .08));
+    const gi = clamp([.1, .37, .64].filter(t => prog[3] >= t).length - 1, 0, 2);
+    if (eBig.dataset.v !== String(gi)) { eBig.dataset.v = String(gi); eBig.textContent = grp[gi][3].toFixed(1) + 'x'; eText.textContent = eTexts[gi]; }
+  }
+
+  function frame(now) {
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.clearRect(0, 0, W, H);
+    const drift = RM ? 0 : (scene === 0 || scene === 4 ? 5 : .5);
+    const sp = prog[scene] ?? 1;
+    for (const p of P) {
+      if (p.S) { const q = clamp((sp - p.q0) / (p.q1 - p.q0), 0, 1), e = ease(q), S = p.S, E = p.E;
+        p.tx = S[0] + (E[0] - S[0]) * e; p.ty = S[1] + (E[1] - S[1]) * e;
+        p.tr = S[2] + (E[2] - S[2]) * e; p.ta = S[3] + (E[3] - S[3]) * e;
+        if (!p.tcb) p.tcb = [0, 0, 0]; for (let k = 0; k < 3; k++) p.tcb[k] = S[4][k] + (E[4][k] - S[4][k]) * e; p.tc = p.tcb; }
+      const t = clamp((now - p.t0 - p.dl) / DUR, 0, 1); const e = ease(t);
+      p.x = p.fx + (p.tx - p.fx) * e; p.y = p.fy + (p.ty - p.fy) * e; p.r = p.fr + (p.tr - p.fr) * e; p.a = p.fa + (p.ta - p.fa) * e;
+      for (let k = 0; k < 3; k++) p.c[k] = p.fc[k] + (p.tc[k] - p.fc[k]) * e;
+      if (p.a < .01) continue;
+      const dx = drift ? Math.sin(now * .0005 + p.seed) * drift : 0, dy = drift ? Math.cos(now * .00043 + p.seed * 1.7) * drift : 0;
+      ctx.beginPath(); ctx.arc(p.x + dx, p.y + dy, Math.max(.6, p.r), 0, 6.2832);
+      ctx.fillStyle = 'rgba(' + (p.c[0] | 0) + ',' + (p.c[1] | 0) + ',' + (p.c[2] | 0) + ',' + p.a.toFixed(3) + ')'; ctx.fill();
+    }
+    const la = clamp((now - sceneT - (RM ? 0 : 650)) / 500, 0, 1);
+    if (la > 0) drawOverlay(la, sp);
+    requestAnimationFrame(frame);
+  }
+
+  const colMap = { paper: '242,243,244', mist: '203,210,214', stone: '152,166,174', turq: '0,195,191' };
+  const rgba = (c, a) => 'rgba(' + colMap[c] + ',' + a + ')';
+  function drawOverlay(a0, sp) {
+    ctx.save();
+    const fade = f => clamp((sp - f) / .06 + (f <= 0 ? 1 : 0), 0, 1);
+    for (const g of guides) {
+      const a = a0 * fade(g.from_q || 0); if (a <= 0) continue; ctx.lineWidth = 1;
+      if (g.type === 'brace') { ctx.strokeStyle = rgba('turq', .8 * a);
+        ctx.beginPath(); ctx.moveTo(g.x0, g.y + 6); ctx.lineTo(g.x0, g.y); ctx.lineTo(g.x1, g.y); ctx.lineTo(g.x1, g.y + 6); ctx.stroke();
+        ctx.font = '600 13px Inter, system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.fillStyle = rgba('turq', a); ctx.fillText(g.t, (g.x0 + g.x1) / 2, g.y - 8);
+      } else if (g.type === 'axes' && axes) { const { ax, X, Y } = axes;
+        ctx.strokeStyle = rgba('mist', .3 * a); ctx.beginPath(); ctx.moveTo(ax.x0, ax.y1); ctx.lineTo(ax.x0, ax.y0); ctx.lineTo(ax.x1, ax.y0); ctx.stroke();
+        ctx.font = '11px "IBM Plex Mono", monospace'; ctx.fillStyle = rgba('stone', a);
+        ctx.textAlign = 'center'; [0, 10, 20].forEach(v => ctx.fillText(v + '%', X(v), ax.y0 + 16));
+        ctx.textAlign = 'right'; [5, 10, 15, 20].forEach(m => ctx.fillText(m + 'x', ax.x0 - 6, Y(m) + 4));
+        if (axes.titles) { ctx.font = '600 13px Inter, system-ui, sans-serif'; ctx.fillStyle = rgba('mist', a);
+          ctx.textAlign = 'right'; ctx.fillText('Share of in-scope deals', ax.x1, ax.y0 + 34);
+          ctx.textAlign = 'left'; ctx.fillText('Listed median EV/EBITDA', ax.x0 - (phone() ? 30 : 40), ax.y1 - 16); } }
+    }
+    for (const l of labels) { const a = a0 * fade(l.from || 0); if (a <= 0) continue;
+      ctx.textAlign = l.al; ctx.font = '600 ' + (phone() ? 12 : 13) + 'px Inter, system-ui, sans-serif';
+      ctx.fillStyle = rgba(l.col, a); ctx.fillText(l.t, l.x, l.y);
+      if (l.sub) { ctx.font = '500 ' + (phone() ? 11 : 12) + 'px "IBM Plex Mono", monospace'; ctx.fillStyle = rgba('turq', a); ctx.fillText(l.sub, l.x, l.y + 17); } }
+    ctx.restore();
+  }
+
+  const story = document.getElementById('story'), fill = document.getElementById('fill');
+  const nodes = [...story.querySelectorAll('.node')]; const cta = document.getElementById('cta'); const wall = document.getElementById('wall');
+  const hero = document.querySelector('.hero');
+  function onScroll() {
+    const sr = story.getBoundingClientRect(); const read = H * (phone() ? .62 : .5);
+    const hgt = clamp(read - sr.top, 0, sr.height); fill.style.height = hgt + 'px';
+    const headY = sr.top + hgt;
+    nodes.forEach(n => n.classList.toggle('on', n.getBoundingClientRect().top + 6 <= headY));
+    const wr = wall.getBoundingClientRect(), hr = hero.getBoundingClientRect();
+    cta.classList.toggle('show', hr.bottom < H * .5 && wr.top > H * .55);
+    updateCards();
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  function resize() { DPR = Math.min(2, window.devicePixelRatio || 1); W = innerWidth; H = innerHeight; cv.width = W * DPR; cv.height = H * DPR; ghostSlots(); setCardTops(); onScroll(); if (scene >= 0) go(scene, true); }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => resize());
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) go(+e.target.dataset.scene); }), { rootMargin: '-45% 0px -45% 0px' });
+  document.querySelectorAll('[data-scene]').forEach(s => io.observe(s));
+  window.addEventListener('resize', resize);
+  resize(); go(0, true);
+  P.forEach(p => { p.a = p.fa = 0; p.t0 = performance.now(); p.dl = RM ? 0 : p.seed % 900; });
+  requestAnimationFrame(frame);
+
+  const form = document.getElementById('leadForm'), err = document.getElementById('err');
+  form.addEventListener('submit', async ev => {
+    ev.preventDefault();
+    const em = document.getElementById('em'), ok = document.getElementById('ok');
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em.value.trim());
+    em.setAttribute('aria-invalid', valid ? 'false' : 'true');
+    if (!valid) { err.textContent = 'Please enter your business email, for example name@company.com.'; em.focus(); return; }
+    if (!ok.checked) { err.textContent = 'The report comes with a TechSpheres subscription. Please tick the box to continue.'; ok.focus(); return; }
+    err.textContent = '';
+    const fn = document.getElementById('fn').value.trim();
+    const btn = form.querySelector('button[type=submit]'); btn.disabled = true;
+    try {
+      await window.ataresSupabase.subscribe({
+        email: em.value.trim(), source: 'report-gate', whitepaperSlug: 'industrial-tech-ma-2026',
+        firstName: fn, lastName: document.getElementById('ln').value.trim(), company: document.getElementById('co').value.trim(),
+        consentText: document.getElementById('consentText').textContent.trim()
+      });
+    } catch (e) {
+      err.textContent = e.invalidEmail ? 'Please enter your business email, for example name@company.com.' : 'Something went wrong. Please try again in a moment.';
+      btn.disabled = false; return;
+    }
+    document.getElementById('doneTitle').textContent = fn ? 'Thank you, ' + fn : 'Thank you';
+    document.getElementById('doneEmail').textContent = em.value.trim();
+    document.getElementById('formBody').hidden = true; document.getElementById('formDone').hidden = false;
+  });
+})();
+</script>
+<script src="../js/supabase.js"></script>
+</body></html>

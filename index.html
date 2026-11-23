@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>atares Insights · Whitepapers</title>
+<meta name="description" content="Sector studies from the atares deal team: who buys, what they pay and who sells next.">
+<link rel="icon" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--ink:#002336;--navy:#003E5F;--petrol:#007775;--turq:#00C3BF;--mist:#cbd2d6;--stone:#98a6ae;--mid:#324e5e;--paper:#f2f3f4;--line:rgba(203,210,214,.18);
+  --f-display:Sora,system-ui,sans-serif;--f-body:Inter,"Segoe UI",system-ui,sans-serif;--f-data:'IBM Plex Mono',monospace;color-scheme:dark}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--f-body);-webkit-font-smoothing:antialiased}
+a{color:var(--turq)}a:hover{color:var(--paper)}
+@keyframes wheel{0%{transform:translateY(0);opacity:1}70%{transform:translateY(10px);opacity:0}100%{opacity:0}}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:url(assets/bg-dark.jpg) center / cover no-repeat}
+#dots{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0;pointer-events:none}
+.wrap{position:relative;z-index:1;padding:0 16px}
+.inner{max-width:1180px;margin:0 auto}
+.mono{font-family:var(--f-data);text-transform:uppercase}
+.eyebrow{font-family:var(--f-data);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--turq)}
+.bar{position:sticky;top:0;z-index:6;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px;margin:0 -16px;background:linear-gradient(var(--ink) 55%, rgba(0,35,54,0))}
+.pill{font-family:var(--f-data);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--stone);border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:rgba(0,35,54,.5)}
+.btn-top{font-size:14px;font-weight:600;color:var(--ink);background:var(--turq);border-radius:999px;padding:8px 14px;text-decoration:none;white-space:nowrap;flex-shrink:0}
+.btn-top:hover{background:var(--paper);color:var(--ink)}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;text-wrap:balance}
+.hero{min-height:78vh;display:flex;align-items:center;padding:16px 0 56px}
+.featured{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:36px;align-items:center;text-decoration:none;color:var(--paper);background:rgba(0,35,54,.78);border:1px solid var(--line);border-radius:18px;padding:clamp(22px,3.5vw,44px);backdrop-filter:blur(6px);transition:border-color .3s}
+.featured:hover{border-color:var(--turq);color:var(--paper)}
+.paper-card{display:flex;flex-direction:column;gap:14px;text-decoration:none;color:var(--paper);background:rgba(0,35,54,.7);border:1px solid var(--line);border-radius:14px;padding:22px;backdrop-filter:blur(6px);transition:border-color .3s,transform .3s}
+.paper-card:hover{border-color:var(--turq);transform:translateY(-2px);color:var(--paper)}
+.chip{font:inherit;font-size:13px;font-weight:600;border-radius:999px;padding:7px 14px;cursor:pointer;border:1px solid var(--line);background:rgba(0,35,54,.5);color:var(--mist)}
+.chip[aria-pressed="true"]{border-color:var(--turq);background:var(--turq);color:var(--ink)}
+.form{background:var(--paper);color:var(--navy);border-radius:16px;padding:26px;display:grid;gap:13px;box-shadow:0 30px 90px rgba(0,0,0,.55),0 0 0 1px rgba(0,195,191,.5)}
+.form input[type=email]{font:inherit;font-weight:400;font-size:15px;padding:10px 12px;border-radius:9px;border:1px solid var(--mist);background:#fff;color:var(--navy);width:100%;box-sizing:border-box}
+.form input[aria-invalid=true]{border-color:#9b4422}
+.submit{font:inherit;font-weight:600;font-size:16px;border:0;border-radius:10px;padding:13px 18px;background:var(--navy);color:#fff;cursor:pointer}
+.submit:hover{background:var(--petrol)}
+.submit[disabled]{opacity:.6;cursor:wait}
+[hidden]{display:none!important}
+@media (max-width:480px){.pill{display:none}}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+<canvas id="dots" aria-hidden="true"></canvas>
+
+<div class="wrap">
+  <div class="inner">
+
+    <header class="bar">
+      <a href="#top" id="top" aria-label="atares" style="display:inline-flex;align-items:center;text-decoration:none"><img src="assets/atares-logo-white.png" alt="atares" style="height:34px;width:auto;display:block"></a>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span class="pill">Insights</span>
+        <a class="btn-top" href="whitepapers/industrial-tech-ma-2026.html">Read the latest report</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div style="max-width:600px;display:grid;gap:22px">
+        <div class="eyebrow">atares Insights · M&amp;A research</div>
+        <h1 style="font-size:clamp(32px,4.6vw,56px);line-height:1.08;margin:0;letter-spacing:-.015em">Sector studies for owners thinking about the next step.</h1>
+        <p style="font-size:clamp(16px,1.5vw,18px);line-height:1.55;color:var(--mist);max-width:48ch;margin:0;text-wrap:pretty">Who buys, what they pay and who sells next. Built by the atares deal team from transaction data, registers and our own mandates.</p>
+        <div style="display:inline-flex;align-items:center;gap:10px;font-size:14px;color:var(--stone)">
+          <i aria-hidden="true" style="width:20px;height:32px;border:1.5px solid var(--stone);border-radius:12px;position:relative;display:inline-block;box-sizing:border-box"><b style="position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:var(--turq);animation:wheel 1.8s ease-in-out infinite"></b></i>
+          Scroll for the latest report
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:0 0 12vh">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
+        <span style="width:10px;height:10px;border-radius:50%;background:var(--turq);box-shadow:0 0 0 5px rgba(0,195,191,.2),0 0 18px rgba(0,195,191,.9)"></span>
+        <span class="eyebrow">Latest · November 2026</span>
+      </div>
+      <a class="featured" href="whitepapers/industrial-tech-ma-2026.html">
+        <div style="display:grid;gap:18px">
+          <div class="mono" style="font-size:11px;letter-spacing:.1em;color:var(--stone)">Industrial technology · Europe · 62 pages</div>
+          <h2 style="font-size:clamp(26px,3vw,38px);line-height:1.12;margin:0">State of Industrial Tech M&amp;A 2026</h2>
+          <p style="margin:0;font-size:17px;line-height:1.55;color:var(--mist);text-wrap:pretty">Deal volume holds at 410 to 445 a year. What a company is worth now depends on its end market: 6.5x to 18.9x EBITDA.</p>
+          <span style="display:inline-flex;align-items:center;gap:10px;justify-self:start;background:var(--turq);color:var(--ink);font-weight:600;font-size:15px;padding:12px 20px;border-radius:999px">Explore the findings
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+        <div style="display:grid;gap:14px">
+          <div style="display:grid;gap:6px;border:1px solid rgba(0,195,191,.45);background:linear-gradient(135deg, rgba(0,119,117,.28), rgba(0,35,54,.75));border-radius:14px;padding:18px 20px">
+            <span style="font-size:15px;color:var(--mist)">Where private industrial deals price today</span>
+            <span style="font-family:var(--f-display);font-weight:700;font-size:clamp(34px,4vw,46px);line-height:1.05;display:flex;align-items:baseline;gap:10px"><span aria-hidden="true" style="filter:blur(9px);user-select:none;color:var(--turq)">8x-88x</span><small style="font-size:.42em;font-weight:600">EBITDA</small></span>
+            <span style="display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--turq)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Revealed in the full report</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px">
+            <div style="display:grid;gap:4px;border-top:1px solid var(--line);padding-top:10px"><span style="font-family:var(--f-display);font-weight:700;font-size:28px;color:var(--turq);line-height:1">1,981</span><span style="font-size:13px;color:var(--mist);line-height:1.4">in-scope deals since 2022</span></div>
+            <div style="display:grid;gap:4px;border-top:1px solid var(--line);padding-top:10px"><span style="font-family:var(--f-display);font-weight:700;font-size:28px;color:var(--turq);line-height:1">18.7%</span><span style="font-size:13px;color:var(--mist);line-height:1.4">of 2026 deals are add-ons, from 6.3%</span></div>
+            <div style="display:grid;gap:4px;border-top:1px solid var(--line);padding-top:10px"><span style="font-family:var(--f-display);font-weight:700;font-size:28px;color:var(--turq);line-height:1">×2.9</span><span style="font-size:13px;color:var(--mist);line-height:1.4">valuation spread by end market</span></div>
+          </div>
+        </div>
+      </a>
+    </section>
+
+    <!-- Library: shown once Supabase lists more than one published whitepaper -->
+    <section id="library" hidden style="padding:4vh 0 12vh;scroll-margin-top:70px">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:28px">
+        <div style="display:grid;gap:10px">
+          <div class="eyebrow">Library</div>
+          <h2 style="font-size:clamp(28px,3.4vw,42px);line-height:1.12;margin:0">All whitepapers</h2>
+        </div>
+        <div id="chips" hidden style="display:flex;flex-wrap:wrap;gap:8px"></div>
+      </div>
+      <div id="papers" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:16px"></div>
+    </section>
+
+    <section style="padding:0 0 12vh;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:36px;align-items:center">
+      <div style="display:grid;gap:12px;max-width:520px">
+        <div class="eyebrow">New reports</div>
+        <h2 style="font-size:clamp(26px,3vw,36px);line-height:1.12;margin:0">Get the next whitepaper when it is published</h2>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:var(--mist)">A short email per report. No other mailings.</p>
+      </div>
+      <form class="form" id="subForm" novalidate>
+        <div id="subBody" style="display:grid;gap:13px">
+          <label for="sub-em" style="display:grid;gap:6px;font-size:13px;font-weight:600">Business email
+            <input id="sub-em" type="email" autocomplete="email" placeholder="name@company.com" required>
+          </label>
+          <label for="sub-ok" style="display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:13px;color:var(--mid);line-height:1.45">
+            <input id="sub-ok" type="checkbox" style="width:18px;height:18px;margin:2px 0 0;accent-color:var(--petrol)">
+            <span id="sub-consent">I agree that atares may email me when a new whitepaper is published. I can unsubscribe at any time.</span>
+          </label>
+          <p id="sub-err" role="alert" style="color:#9b4422;font-size:13px;min-height:1em;margin:0"></p>
+          <button class="submit" type="submit">Notify me</button>
+        </div>
+        <div id="subDone" hidden style="display:grid;gap:13px">
+          <div style="width:44px;height:44px;border-radius:50%;background:var(--turq);display:grid;place-items:center"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2.6" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+          <h3 style="margin:0;font-size:22px">Thank you</h3>
+          <p style="margin:0;color:var(--mid);font-size:15px">You are on the list. We will email you when the next whitepaper is published.</p>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
+
+<footer style="position:relative;z-index:1;padding:24px 16px 48px;color:var(--stone);font-size:12px;font-family:var(--f-data)">
+  <div style="max-width:1180px;margin:0 auto;border-top:1px solid var(--line);padding-top:18px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between"><span style="display:inline-flex;align-items:center;gap:14px"><img src="assets/atares-logo-white.png" alt="atares" style="height:22px;width:auto;display:block;opacity:.8">atares GmbH · Munich · www.atares.team</span><span>Strictly for information purposes</span></div>
+</footer>
+
+<script src="js/supabase.js"></script>
+<script>
+(() => {
+  /* ---------- dot spiral background ---------- */
+  const cv = document.getElementById('dots'), ctx = cv.getContext('2d');
+  const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const N = 520, GA = Math.PI * (3 - Math.sqrt(5));
+  let s = 20271123; const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  const D = Array.from({ length: N }, (_, k) => ({ k, seed: rnd() * 1000, t: k % 9 === 0 }));
+  let W, H, DPR;
+  const resize = () => { DPR = Math.min(2, devicePixelRatio || 1); W = innerWidth; H = innerHeight; cv.width = W * DPR; cv.height = H * DPR; };
+  resize(); addEventListener('resize', resize);
+  const t0 = performance.now();
+  const frame = now => {
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.clearRect(0, 0, W, H);
+    const sc = Math.min(1, scrollY / (H * .9));
+    const cx = W * (W < 760 ? .5 : .68 - sc * .18), cy = H * (W < 760 ? .32 : .5);
+    const step = Math.min(W, H) * (.019 + sc * .012);
+    const rot = RM ? 0 : now * .00002 + sc * .6;
+    const fadeIn = Math.min(1, (now - t0) / 1200);
+    for (const d of D) {
+      const rr = step * Math.sqrt(d.k + .5), a = d.k * GA + rot;
+      const dx = RM ? 0 : Math.sin(now * .0005 + d.seed) * 4, dy = RM ? 0 : Math.cos(now * .00043 + d.seed * 1.7) * 4;
+      const al = (d.t ? .9 : .55) * fadeIn * (1 - sc * .55);
+      ctx.beginPath(); ctx.arc(cx + rr * Math.cos(a) + dx, cy + rr * Math.sin(a) + dy, d.t ? 2.4 : 1.8, 0, 6.2832);
+      ctx.fillStyle = d.t ? `rgba(0,195,191,${al})` : `rgba(203,210,214,${al})`; ctx.fill();
+    }
+    requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+
+  /* ---------- library, loaded from Supabase ---------- */
+  const lib = document.getElementById('library'), grid = document.getElementById('papers'), chipBox = document.getElementById('chips');
+  let papers = [], filter = 'All';
+  const el = (tag, css, text) => { const e = document.createElement(tag); if (css) e.style.cssText = css; if (text != null) e.textContent = text; return e; };
+  function renderPapers() {
+    grid.replaceChildren(...papers.filter(p => filter === 'All' || p.sector === filter).map(p => {
+      const a = el('a'); a.className = 'paper-card'; a.href = p.href;
+      const top = el('div', "display:flex;justify-content:space-between;gap:12px;font-family:var(--f-data);font-size:11px;letter-spacing:.1em;text-transform:uppercase");
+      top.append(el('span', 'color:var(--turq)', p.sector), el('span', 'color:var(--stone)', String(p.year)));
+      const bottom = el('div', 'display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--line);padding-top:12px;margin-top:auto');
+      bottom.append(el('span', 'font-family:var(--f-data);font-size:11px;color:var(--stone)', p.meta || ''));
+      bottom.insertAdjacentHTML('beforeend', '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#00C3BF" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>');
+      a.append(top, el('h3', 'margin:0;font-size:20px;line-height:1.25', p.title), el('p', 'margin:0;font-size:15px;line-height:1.5;color:var(--mist);text-wrap:pretty', p.summary), bottom);
+      return a;
+    }));
+    chipBox.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.s === filter)));
+  }
+  window.ataresSupabase.listWhitepapers().then(rows => {
+    papers = rows || [];
+    if (papers.length < 2) return;                       // a single paper is already featured above
+    const sectors = ['All', ...new Set(papers.map(p => p.sector))];
+    if (sectors.length > 2) {
+      chipBox.replaceChildren(...sectors.map(label => {
+        const b = el('button', null, label); b.type = 'button'; b.className = 'chip'; b.dataset.s = label;
+        b.onclick = () => { filter = label; renderPapers(); }; return b;
+      }));
+      chipBox.hidden = false;
+    }
+    renderPapers(); lib.hidden = false;
+  }).catch(() => { /* library stays hidden; the featured report is static */ });
+
+  /* ---------- subscribe form ---------- */
+  const form = document.getElementById('subForm'), em = document.getElementById('sub-em'), ok = document.getElementById('sub-ok'), err = document.getElementById('sub-err');
+  form.addEventListener('submit', async ev => {
+    ev.preventDefault();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em.value.trim());
+    em.setAttribute('aria-invalid', valid ? 'false' : 'true');
+    if (!valid) { err.textContent = 'Please enter your business email, for example name@company.com.'; em.focus(); return; }
+    if (!ok.checked) { err.textContent = 'Please agree to receive emails from atares.'; ok.focus(); return; }
+    const btn = form.querySelector('button[type=submit]'); btn.disabled = true; err.textContent = '';
+    try {
+      await window.ataresSupabase.subscribe({ email: em.value.trim(), source: 'home-subscribe', consentText: document.getElementById('sub-consent').textContent.trim() });
+      document.getElementById('subBody').hidden = true; document.getElementById('subDone').hidden = false;
+    } catch (e) {
+      err.textContent = e.invalidEmail ? 'Please enter your business email, for example name@company.com.' : 'Something went wrong. Please try again in a moment.';
+    } finally { btn.disabled = false; }
+  });
+})();
+</script>
+</body>
+</html>
